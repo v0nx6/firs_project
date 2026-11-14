@@ -1,0 +1,15 @@
+### 
+
+# POST http://localhost:3000/api/delete/6af7e863efee8fc32a06c8b9 HTTP/1.1
+# Accept: application/json
+# Content-Type: application/json
+#
+# {
+#   "email": "test@gmail.com",
+#   "username": "admin124"
+# }
+
+
+
+DELETE http://localhost:3000/api/delete/6af7e863efee8fc32a06c8b9 HTTP/1.1
+Accept: application/json
