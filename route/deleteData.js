@@ -4,7 +4,7 @@ export const deleteData = async (req, res) => {
   try {
     const userId = await User.deleteOne({ _id: req.user.id });
 
-    if (userId.deleteCount === 0) {
+    if (userId.deletedCount === 0) {
       res.status(404).json({
         msg: "user not found",
       });

@@ -4,7 +4,7 @@ import "dotenv/config";
 export const verifyJwt = (req, res, next) => {
   const tokenReq = req.headers.Authorization || req.headers.authorization;
 
-  if (!tokenReq?.startsWith("Bearer")) {
+  if (!tokenReq?.startsWith("Bearer ")) {
     res.status(403).json({
       msg: "Forbidden",
     });
@@ -18,7 +18,7 @@ export const verifyJwt = (req, res, next) => {
     req.user = decode.userInfo;
     next();
   } catch (error) {
-    return res.status(400).json({
+    return res.status(401).json({
       msg: "invalid token",
     });
   }
