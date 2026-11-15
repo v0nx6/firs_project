@@ -28,7 +28,7 @@ protected routes — plus a simple product endpoint tied to the logged-in user.
 ## Getting started
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/v0nx6/firs_project.git
 cd Api_v2
 npm install
 ```
