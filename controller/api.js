@@ -7,6 +7,7 @@ import { refreshToken } from "../auth/refreshToken.js";
 import { verifyJwt } from "../middleware/jwtVerify.js";
 import { getData } from "../route/getData.js";
 import { logout } from "../route/logOut.js";
+import { addProduct } from "../productController/addProduct.js";
 const api = express();
 api.disable("X-Powered-By:");
 
@@ -19,5 +20,6 @@ api.put("/update/:id", updateUser);
 api.delete("/delete/:id", deleteData);
 api.get("/getData/", getData);
 api.post("/logOut", logout);
+api.post("/addProduct", addProduct);
 
 export default api;

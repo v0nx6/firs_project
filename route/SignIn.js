@@ -1,4 +1,3 @@
-import bcrypt from "bcrypt";
 import User from "../controller/Schema.js";
 
 export const SignIn = async (req, res) => {
@@ -23,12 +22,10 @@ export const SignIn = async (req, res) => {
       return;
     }
 
-    const hash = await bcrypt.hash(password, 10);
-
     await User.create({
       username: username,
       email: email,
-      password: hash,
+      password: password,
     });
 
     res.status(201).json({

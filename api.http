@@ -1,12 +1,13 @@
 ### 
 
 POST http://localhost:3000/api/SignIn HTTP/1.1
-Accept: application/jsonContent-Type: application/json
+Accept: application
+Jsoncontent-Type: application/json
 
 {
-  "email": "okegas@gmail.com",
-  "password": "okegas",
-  "username": "okegas"
+  "email": "pisang@gmail.com",
+  "password": "pisang",
+  "username": "pisang"
 }
 
 
@@ -41,3 +42,17 @@ Accept: application/json
 POST http://localhost:3000/api/logOut HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6Im9rZWdhcyIsImVtYWlsIjoib2tlZ2FzQGdtYWlsLmNvbSIsImlkIjoiNmFmOTAyYjg4ZjM5MmE0ZDA3ODc3ZDE3In0sImlhdCI6MTc5NDcwNjk3NSwiZXhwIjoxNzk0NzA3MDM1fQ.Mny4j3qKQMqmEo9f49WV5hn-JogkU7EhbL1SkgC1F9g
 Accept: application/jsonContent-Type: application/json
+
+
+### 
+
+POST http://localhost:3000/api/addProduct HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6Im9rZWdhcyIsImVtYWlsIjoib2tlZ2FzQGdtYWlsLmNvbSIsImlkIjoiNmFmOTAyYjg4ZjM5MmE0ZDA3ODc3ZDE3In0sImlhdCI6MTc5NDcyMTMxNywiZXhwIjoxNzk0NzIxMzc3fQ.y1P4Y02QFhqBraaT_hOloPtPdjsY5JzUIIclsABFMcI
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "soap",
+  "price": 15.000,
+  "stock": 10
+}

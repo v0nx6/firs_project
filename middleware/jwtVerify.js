@@ -14,16 +14,17 @@ export const verifyJwt = async (req, res, next) => {
 
     const token = tokenReq.split(" ")[1];
 
-    jwt.verify(token, process.env.JWT_SECRET, (err) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
       if (err) {
         res.status(403).json({
           msg: "Forbidden",
         });
         return;
       }
-    });
 
-    next();
+      req.user = decode.userInfo;
+      next();
+    });
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
