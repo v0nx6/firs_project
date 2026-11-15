@@ -18,41 +18,41 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "password": "okegas",
-  "username": "okegas"
+  "password": "vario",
+  "username": "vario"
 }
 
 
 ### 
 
-GET http://localhost:3000/api/refresh/6af902b88f392a4d07877d17 HTTP/1.1
-Cookie: jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6Im9rZWdhcyIsImVtYWlsIjoib2tlZ2FzQGdtYWlsLmNvbSJ9LCJpYXQiOjE3OTQ3MDY2NzYsImV4cCI6MTc5NDc5MzA3Nn0.uuu6TlFnF75SGaDJWgdoARDMzbIK8nh18qnUjNNJsWI
+GET http://localhost:3000/api/refresh/ HTTP/1.1
+Cookie: jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6Im9rZWdhcyIsImVtYWlsIjoib2tlZ2FzQGdtYWlsLmNvbSIsImlkIjoiNmFmOTAyYjg4ZjM5MmE0ZDA3ODc3ZDE3In0sImlhdCI6MTc5NDcyNjE5MSwiZXhwIjoxNzk0ODEyNTkxfQ.sN2-bWmvoT5GrjvcfXa_-ty72GsonyFMK4fTqUE_MSM
 Accept: application/json
 
 
 ### 
 
-GET http://localhost:3000/api/getData/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6Im9rZWdhcyIsImVtYWlsIjoib2tlZ2FzQGdtYWlsLmNvbSIsImlkIjoiNmFmOTAyYjg4ZjM5MmE0ZDA3ODc3ZDE3In0sImlhdCI6MTc5NDcwNjk3NSwiZXhwIjoxNzk0NzA3MDM1fQ.Mny4j3qKQMqmEo9f49WV5hn-JogkU7EhbL1SkgC1F9g
+GET http://localhost:3000/user/me HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6Im9rZWdhcyIsImVtYWlsIjoib2tlZ2FzQGdtYWlsLmNvbSIsImlkIjoiNmFmOTAyYjg4ZjM5MmE0ZDA3ODc3ZDE3In0sImlhdCI6MTc5NDc0NDAyNiwiZXhwIjoxNzk0NzQ0MDg2fQ.jBnRlS0VEzYBm3m6nCrny_oqRhRDSdwcFlvIphHbnU4
 Accept: application/json
 
 
 ### 
 
-POST http://localhost:3000/api/logOut HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6Im9rZWdhcyIsImVtYWlsIjoib2tlZ2FzQGdtYWlsLmNvbSIsImlkIjoiNmFmOTAyYjg4ZjM5MmE0ZDA3ODc3ZDE3In0sImlhdCI6MTc5NDcwNjk3NSwiZXhwIjoxNzk0NzA3MDM1fQ.Mny4j3qKQMqmEo9f49WV5hn-JogkU7EhbL1SkgC1F9g
-Accept: application/jsonContent-Type: application/json
-
-
-### 
-
-POST http://localhost:3000/api/addProduct HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6Im9rZWdhcyIsImVtYWlsIjoib2tlZ2FzQGdtYWlsLmNvbSIsImlkIjoiNmFmOTAyYjg4ZjM5MmE0ZDA3ODc3ZDE3In0sImlhdCI6MTc5NDcyMTMxNywiZXhwIjoxNzk0NzIxMzc3fQ.y1P4Y02QFhqBraaT_hOloPtPdjsY5JzUIIclsABFMcI
+PUT http://localhost:3000/user/update HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6Im9rZWdhcyIsImVtYWlsIjoib2tlZ2FzQGdtYWlsLmNvbSIsImlkIjoiNmFmOTAyYjg4ZjM5MmE0ZDA3ODc3ZDE3In0sImlhdCI6MTc5NDc0NDIxMiwiZXhwIjoxNzk0NzQ0MjcyfQ.mtBUbT9EdPbLWf-UGTyDqLvLjBFv0cSB0qnJW31wvTI
 Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "soap",
-  "price": 15.000,
-  "stock": 10
+  "password": "vario",
+  "username": "vario"
 }
+
+
+### 
+
+POST http://localhost:3000/user/logout HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6InZhcmlvIiwiZW1haWwiOiJva2VnYXNAZ21haWwuY29tIiwiaWQiOiI2YWY5MDJiODhmMzkyYTRkMDc4NzdkMTcifSwiaWF0IjoxNzk0NzQ1NjE4LCJleHAiOjE3OTQ3NDU2Nzh9.Va91dABkK_DB41ZX-_O-isaCrVieYDQWv4ZqdKSmlg
+Accept: application/json
+Content-Type: application/json

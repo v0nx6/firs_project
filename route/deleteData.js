@@ -2,18 +2,13 @@ import User from "../controller/Schema.js";
 
 export const deleteData = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const userId = await User.deleteOne({ _id: req.user.id });
 
-    const findUser = await User.findById(userId);
-    if (!findUser) {
+    if (userId.deleteCount === 0) {
       res.status(404).json({
-        msg: "not found",
+        msg: "user not found",
       });
-      return;
     }
-
-    await User.deleteOne({ _id: userId });
-
     res.status(200).json({
       msg: "succes to delete user",
     });

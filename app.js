@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import express from "express";
 import cookieParser from "cookie-parser";
 import api from "./controller/api.js";
+import user from "./controller/profile.js";
 const app = express();
 const PORT = 3000;
 
@@ -19,6 +20,7 @@ const conn = async () => {
 conn();
 
 app.use("/api", api);
+app.use("/user", user);
 
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);

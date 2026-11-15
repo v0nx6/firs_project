@@ -4,40 +4,46 @@ import User from "../controller/Schema.js";
 
 export const refreshToken = async (req, res) => {
   try {
-    const cookie = req.cookies;
-    const userId = req.params.id;
+    const cookie = req.cookies?.jwt;
 
-    if (!cookie?.jwt) {
-      res.status(403).json({
-        msg: "Unauthorized",
+    if (!cookie) {
+      res.status(401).json({
+        msg: "refresh token required",
       });
       return;
     }
 
-    const findUser = await User.findById({ _id: userId });
+    let decode;
+    try {
+      decode = jwt.verify(cookie, process.env.JWT_VERIFY);
+    } catch (error) {
+      return res.status(401).json({
+        msg: "invalid refresh token",
+      });
+    }
+
+    const findUser = await User.findById(decode.userInfo.id);
 
     if (!findUser) {
-      res.status(403).josn({
+      res.status(403).json({
         msg: "Forbidden",
       });
       return;
     }
 
-    const token = cookie.jwt;
-
-    jwt.verify(token, process.env.JWT_VERIFY, (err, decode) => {
-      if (err || findUser.username !== decode.userInfo.username) {
-        res.status(403).json({
-          msg: "forbidden",
-        });
-        return;
-      }
-    });
+    if (findUser.refreshToken !== cookie) {
+      res.status(401).json({
+        msg: "invalid token",
+      });
+      return;
+    }
 
     const createJWT = jwt.sign(
       {
         userInfo: {
+          id: findUser._id,
           username: findUser.username,
+          email: findUser.email,
         },
       },
       process.env.JWT_SECRET,

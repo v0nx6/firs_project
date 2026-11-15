@@ -4,7 +4,7 @@ export const SignIn = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    if (!username || !password) {
+    if (!username || !password || !email) {
       res.status(400).json({
         msg: "username and password required!",
       });

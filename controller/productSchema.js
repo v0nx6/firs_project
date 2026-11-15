@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import User from "./Schema.js";
 
 const productSchema = mongoose.Schema({
   name: {
@@ -16,7 +15,8 @@ const productSchema = mongoose.Schema({
   },
   seller: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: User,
+    ref: "User",
+    required: true,
   },
 });
 

@@ -43,7 +43,13 @@ export const SignUp = async (req, res) => {
     );
 
     const refreshJWT = jwt.sign(
-      { userInfo: { username: username, email: findUser.email } },
+      {
+        userInfo: {
+          username: username,
+          email: findUser.email,
+          id: findUser._id,
+        },
+      },
       process.env.JWT_VERIFY,
       { expiresIn: "1d" },
     );
