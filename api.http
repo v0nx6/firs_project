@@ -1,15 +1,43 @@
 ### 
 
-# POST http://localhost:3000/api/delete/6af7e863efee8fc32a06c8b9 HTTP/1.1
-# Accept: application/json
-# Content-Type: application/json
-#
-# {
-#   "email": "test@gmail.com",
-#   "username": "admin124"
-# }
+POST http://localhost:3000/api/SignIn HTTP/1.1
+Accept: application/jsonContent-Type: application/json
+
+{
+  "email": "okegas@gmail.com",
+  "password": "okegas",
+  "username": "okegas"
+}
 
 
+### 
 
-DELETE http://localhost:3000/api/delete/6af7e863efee8fc32a06c8b9 HTTP/1.1
+POST http://localhost:3000/api/SignUp HTTP/1.1
 Accept: application/json
+Content-Type: application/json
+
+{
+  "password": "okegas",
+  "username": "okegas"
+}
+
+
+### 
+
+GET http://localhost:3000/api/refresh/6af902b88f392a4d07877d17 HTTP/1.1
+Cookie: jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6Im9rZWdhcyIsImVtYWlsIjoib2tlZ2FzQGdtYWlsLmNvbSJ9LCJpYXQiOjE3OTQ3MDY2NzYsImV4cCI6MTc5NDc5MzA3Nn0.uuu6TlFnF75SGaDJWgdoARDMzbIK8nh18qnUjNNJsWI
+Accept: application/json
+
+
+### 
+
+GET http://localhost:3000/api/getData/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6Im9rZWdhcyIsImVtYWlsIjoib2tlZ2FzQGdtYWlsLmNvbSIsImlkIjoiNmFmOTAyYjg4ZjM5MmE0ZDA3ODc3ZDE3In0sImlhdCI6MTc5NDcwNjk3NSwiZXhwIjoxNzk0NzA3MDM1fQ.Mny4j3qKQMqmEo9f49WV5hn-JogkU7EhbL1SkgC1F9g
+Accept: application/json
+
+
+### 
+
+POST http://localhost:3000/api/logOut HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mbyI6eyJ1c2VybmFtZSI6Im9rZWdhcyIsImVtYWlsIjoib2tlZ2FzQGdtYWlsLmNvbSIsImlkIjoiNmFmOTAyYjg4ZjM5MmE0ZDA3ODc3ZDE3In0sImlhdCI6MTc5NDcwNjk3NSwiZXhwIjoxNzk0NzA3MDM1fQ.Mny4j3qKQMqmEo9f49WV5hn-JogkU7EhbL1SkgC1F9g
+Accept: application/jsonContent-Type: application/json

@@ -31,7 +31,13 @@ export const SignUp = async (req, res) => {
     }
 
     const createJWT = jwt.sign(
-      { userInfo: { username: username, email: findUser.email } },
+      {
+        userInfo: {
+          username: username,
+          email: findUser.email,
+          id: findUser._id,
+        },
+      },
       process.env.JWT_SECRET,
       { expiresIn: "60s" },
     );
@@ -56,6 +62,7 @@ export const SignUp = async (req, res) => {
       msg: "succes to logIn",
       jwt: createJWT,
       user: findUser.username,
+      id: findUser._id,
     });
   } catch (error) {
     console.error(error);
