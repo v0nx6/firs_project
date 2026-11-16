@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import User from "../controller/Schema.js";
+import User from "../schema/Schema.js";
 
-export const SignUp = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
 

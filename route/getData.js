@@ -1,4 +1,4 @@
-import User from "../controller/Schema.js";
+import User from "../schema/Schema.js";
 import "dotenv/config";
 
 export const getData = async (req, res) => {

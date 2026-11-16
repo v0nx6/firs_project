@@ -3,6 +3,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import api from "./controller/api.js";
 import user from "./controller/profile.js";
+import productRoute from "./controller/productRoute.js";
 const app = express();
 const PORT = 3000;
 
@@ -21,6 +22,7 @@ conn();
 
 app.use("/api", api);
 app.use("/user", user);
+app.use("/product", productRoute);
 
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);

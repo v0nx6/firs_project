@@ -1,6 +1,6 @@
-import User from "../controller/Schema.js";
+import User from "../schema/Schema.js";
 
-export const SignIn = async (req, res) => {
+export const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 

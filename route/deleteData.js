@@ -1,4 +1,4 @@
-import User from "../controller/Schema.js";
+import User from "../schema/Schema.js";
 
 export const deleteData = async (req, res) => {
   try {

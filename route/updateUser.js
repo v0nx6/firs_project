@@ -1,4 +1,4 @@
-import User from "../controller/Schema.js";
+import User from "../schema/Schema.js";
 import bcrypt from "bcrypt";
 
 export const updateUser = async (req, res) => {

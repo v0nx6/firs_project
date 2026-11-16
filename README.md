@@ -2,8 +2,8 @@
 
 A small REST API I built while learning backend development with Node.js.
 
-It covers the basics of auth — register, login, JWT access + refresh tokens,
-protected routes — plus a simple product endpoint tied to the logged-in user.
+It covers auth (register, login, JWT access + refresh tokens), user profiles,
+a product catalog, a shopping cart, and a simple checkout flow.
 
 > Still a work in progress. I'm using this project to practice Express,
 > Mongoose, and JWT, so expect changes.
@@ -18,12 +18,26 @@ protected routes — plus a simple product endpoint tied to the logged-in user.
 
 ## Features
 
+**Auth**
+
 - Register and login with hashed passwords
 - Short-lived access token + long-lived refresh token
 - Refresh token stored in an `httpOnly` cookie and in the database
-- Bearer token middleware protecting the `/user` routes
-- Update and delete your own account
-- Add products owned by the logged-in user
+
+**User**
+
+- Get, update, and delete your own account
+
+**Product**
+
+- Public product list and search
+- Create products owned by the logged-in user
+
+**Cart & Order**
+
+- Add products to your cart
+- View your cart with the total price
+- Checkout: creates an order, decreases product stock, and clears the cart
 
 ## Getting started
 
@@ -59,9 +73,9 @@ Server runs at `http://localhost:3000`.
 
 | Method | Endpoint        | Auth   | Description                                  |
 | ------ | --------------- | ------ | -------------------------------------------- |
-| POST   | `/api/SignIn`   | —      | Register a new user                          |
-| POST   | `/api/SignUp`   | —      | Login, returns access token + refresh cookie  |
-| GET    | `/api/refresh/` | cookie | Get a new access token                       |
+| POST   | `/api/register` | —      | Register a new user                          |
+| POST   | `/api/login`    | —      | Login, returns access token + refresh cookie |
+| GET    | `/api/refresh`  | cookie | Get a new access token                       |
 
 ### User — Bearer token required
 
@@ -72,21 +86,23 @@ Server runs at `http://localhost:3000`.
 | POST   | `/user/logout` | Clear the refresh token |
 | DELETE | `/user/delete` | Delete your own account |
 
-### Product — Bearer token required
+### Product
 
-| Method | Endpoint          | Description              |
-| ------ | ----------------- | ------------------------ |
-| POST   | `/api/addProduct` | Add a product owned by you |
+| Method | Endpoint              | Auth   | Description                      |
+| ------ | --------------------- | ------ | -------------------------------- |
+| GET    | `/product/getAll`     | —      | List all products                |
+| GET    | `/product/filter`     | —      | Search products by name          |
+| POST   | `/product/addProduct` | Bearer | Create a product owned by you    |
+| POST   | `/product/addToCart`  | Bearer | Add a product to your cart       |
+| GET    | `/product/cart`       | Bearer | View your cart and total price   |
+| POST   | `/product/checkOut`   | Bearer | Turn your cart into an order     |
 
-> Heads up: the route names are a bit off. `SignIn` actually registers and
-> `SignUp` actually logs in. Planning to rename them to `/register` and `/login`.
-
-## Example
+## Examples
 
 **Register**
 
 ```http
-POST /api/SignIn
+POST /api/register
 Content-Type: application/json
 
 {
@@ -99,7 +115,7 @@ Content-Type: application/json
 **Login**
 
 ```http
-POST /api/SignUp
+POST /api/login
 Content-Type: application/json
 
 {
@@ -112,48 +128,118 @@ Response:
 
 ```json
 {
-  "msg": "success to log in",
+  "msg": "succes to logIn",
   "jwt": "eyJhbGciOi...",
   "user": "budi",
   "id": "6af902b88f392a4d07877d17"
 }
 ```
 
-**Use the token**
+**Add a product** (use the token from login)
 
 ```http
-GET /user/me
+POST /product/addProduct
+Authorization: Bearer eyJhbGciOi...
+Content-Type: application/json
+
+{
+  "name": "bakso",
+  "price": 20000,
+  "stock": 30
+}
+```
+
+**Add it to your cart**
+
+```http
+POST /product/addToCart
+Authorization: Bearer eyJhbGciOi...
+Content-Type: application/json
+
+{
+  "name": "bakso",
+  "sellerID": "6af902b88f392a4d07877d17"
+}
+```
+
+**View your cart**
+
+```http
+GET /product/cart
 Authorization: Bearer eyJhbGciOi...
 ```
+
+```json
+{
+  "person": "budi",
+  "total_price": 20000,
+  "total": 1,
+  "data": [ ... ]
+}
+```
+
+**Checkout**
+
+```http
+POST /product/checkOut
+Authorization: Bearer eyJhbGciOi...
+```
+
+```json
+{
+  "msg": "succes to order",
+  "order_id": "6b01a2c3d4e5f60718293a4b",
+  "total": 20000
+}
+```
+
+## Data models
+
+- **User** — `username`, `email`, `password` (hashed), `refreshToken`
+- **Product** — `name`, `price`, `stock`, `seller` → User
+- **Cart** — `username`, `product` → Product, `price`, `seller` → User
+- **Order** — `buyer` → User, `item[]` (product + price), `total`, `status`
 
 ## Project structure
 
 ```
 Api_v2/
-├── app.js                  # entry point
+├── app.js                    # entry point
 ├── controller/
-│   ├── api.js              # auth + product routes
-│   ├── profile.js          # user routes (/user)
-│   ├── Schema.js           # User model
-│   └── productSchema.js    # Product model
+│   ├── api.js                # auth routes        (/api)
+│   ├── profile.js            # user routes        (/user)
+│   └── productRoute.js       # product routes     (/product)
 ├── route/
-│   ├── SignIn.js           # register
-│   ├── SignUp.js           # login
+│   ├── register.js
+│   ├── login.js
 │   ├── getData.js
 │   ├── updateUser.js
 │   ├── deleteData.js
 │   └── logOut.js
 ├── middleware/
-│   └── jwtVerify.js        # bearer token check
+│   └── jwtVerify.js          # bearer token check
 ├── auth/
-│   └── refreshToken.js     # refresh flow
+│   └── refreshToken.js       # refresh flow
 ├── productController/
-│   └── addProduct.js
-└── api.http                # manual request examples
+│   ├── addProduct.js
+│   ├── getAllProduct.js
+│   ├── filter.js
+│   ├── addToCart.js
+│   ├── cartDisplay.js
+│   └── checkOut.js
+├── schema/
+│   ├── Schema.js             # User
+│   ├── productSchema.js      # Product
+│   ├── cartSchema.js         # Cart
+│   └── orderSchema.js        # Order
+└── api.http                  # manual request examples
 ```
 
 ## Notes
 
 - `.env` is not committed. Use the example above.
 - This is a learning project, not production-ready.
+- Prices must be plain numbers in JSON: write `20000`, not `20.000`
+  (a dot means a decimal point, so `20.000` is stored as `20`).
 - Each user can only have one product with the same name.
+- `/product/filter` currently expects `name` in the request body.

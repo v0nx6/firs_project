@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import User from "../controller/Schema.js";
+import User from "../schema/Schema.js";
 
 export const refreshToken = async (req, res) => {
   try {

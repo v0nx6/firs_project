@@ -1,4 +1,4 @@
-import Product from "../controller/productSchema.js";
+import Product from "../schema/productSchema.js";
 
 export const addProduct = async (req, res) => {
   try {
@@ -6,7 +6,7 @@ export const addProduct = async (req, res) => {
 
     if (!name || !price || !stock) {
       res.status(400).json({
-        msg: "name, price adn stock required",
+        msg: "name, price and stock required",
       });
       return;
     }
