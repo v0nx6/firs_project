@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import api from "./controller/api.js";
 import user from "./controller/profile.js";
 import productRoute from "./controller/productRoute.js";
+import "dotenv/config";
 const app = express();
 const PORT = 3000;
 
@@ -12,7 +13,7 @@ app.use(cookieParser());
 
 const conn = async () => {
   try {
-    await mongoose.connect("mongodb://localhost/test123");
+    await mongoose.connect(process.env.MONGO_URL);
     console.log("succes to connect!");
   } catch (error) {
     console.error(error);

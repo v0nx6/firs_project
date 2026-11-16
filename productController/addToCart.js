@@ -3,18 +3,16 @@ import Product from "../schema/productSchema.js";
 
 export const addToCart = async (req, res) => {
   try {
-    const { name, sellerID } = req.body;
+    const { productId } = req.body;
 
-    if (!name) {
+    if (!productId) {
       res.status(400).json({
-        msg: "name required",
+        msg: "qeury name required",
       });
       return;
     }
 
-    const findProduct = await Product.findOne({
-      $and: [{ name: name, seller: sellerID }],
-    });
+    const findProduct = await Product.findOne({ _id: productId });
 
     if (!findProduct) {
       res.status(404).json({

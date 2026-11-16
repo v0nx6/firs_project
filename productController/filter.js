@@ -4,6 +4,13 @@ export const filterProduct = async (req, res) => {
   try {
     const { name } = req.body;
 
+    if (!name) {
+      res.status(400).json({
+        msg: "name query required",
+      });
+      return;
+    }
+
     const filterResult = await Product.find({ name: name }).populate(
       "seller",
       "username",
@@ -17,9 +24,10 @@ export const filterProduct = async (req, res) => {
       res.status(404).json({
         msg: "product not found",
       });
+      return;
     }
   } catch (error) {
     console.error(error);
-    res.status(500);
+    res.sendStatus(500);
   }
 };

@@ -8,6 +8,7 @@ export const deleteData = async (req, res) => {
       res.status(404).json({
         msg: "user not found",
       });
+      return;
     }
     res.status(200).json({
       msg: "succes to delete user",
