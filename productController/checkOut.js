@@ -1,5 +1,4 @@
 import Cart from "../schema/cartSchema.js";
-import Product from "../schema/productSchema.js";
 import Order from "../schema/orderSchema.js";
 
 export const checkOut = async (req, res) => {
